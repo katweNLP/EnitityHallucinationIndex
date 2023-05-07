@@ -1,0 +1,6 @@
+gpt/text_davinci_003
+huggingface-course/mt5-small-finetuned-amazon-en-es
+google/pegasus-large
+sshleifer/distilbart-cnn-12-6
+facebook/bart-large-cnn
+google/pegasus-xsum

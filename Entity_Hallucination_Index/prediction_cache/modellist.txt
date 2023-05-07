@@ -1,0 +1,7 @@
+facebook/bart-large-cnn
+sshleifer/distilbart-cnn-12-6
+huggingface_gen
+google/pegasus-xsum
+google/pegasus-large
+facebook/bart-large-xsum
+sshleifer/distill-pegasus-cnn-16-4

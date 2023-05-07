@@ -1,0 +1,53 @@
+Use NER algorithm , to extract all entities from input, ref and generated . NER's output will be like : 
+
+https://huggingface.co/models?pipeline_tag=token-classification&sort=likes
+
+[
+  {
+    "entity_group": "PER",
+    "score": 0.9999939799308777,
+    "word": "Sam Sodje",
+    "start": 0,
+    "end": 9
+  },
+  {
+    "entity_group": "PER",
+    "score": 0.9999866485595703,
+    "word": "Efe",
+    "start": 54,
+    "end": 57
+  }
+ ]
+ 
+1. Count the entities in Input text, count the entities in the reference text, count entities in generated summary 
+2. with respect to Input:
+			a. find new entities in Reference summary - Hallucination
+			b. find Lost entities in Reference summary - Unimportant 
+			c. find the new entities in generated summary  - Hallucination
+			d. Find lost entities in generated summary -  Lost Focus
+3. with respect to the reference summary :
+			a. Find the matching entities present in generated summary - Positive hallucination 
+			b. Find the lost entities  in generated summary (check input)   - Lost Focus 
+			c. Find the new entities present in generated summary - Negative hallucination 
+
+2.a Hallucination in reference summary : |x| means count  
+		|entities not present in input |/ | entities present in  reference | 
+2.b unimportant in reference summary  : 
+        | entities not present in reference |/ | entities present in  input | 
+2.c Hallucination in generated summary :
+        |entities not present in input |/ | entities present in  generated summary  | 		
+2.d Lost entities in generated summary :
+		|entities not present in generated |/ | entities present in input  | 		
+
+
+3. a Positive hallucination in generated summary :    <<<< should be closer to 1
+        (2*| matching entities | ) /  ( | entities in reference| + |entities in generated|)  =====  check only hallucinated entities
+3  b Lost focus  in generated summary :  
+        | Entities not present in ref wrt generated (but present in input) | /  | entities present in  generated | 
+3  c Negative hallucination in generated summary :
+        | Entities not present in reference text (& entities not present input)  | /  | entities present in generated | 
+
+
+		
+		
+			
